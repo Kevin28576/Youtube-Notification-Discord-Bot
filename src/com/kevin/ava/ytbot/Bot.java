@@ -152,8 +152,8 @@ public class Bot extends ListenerAdapter {
         ).queue();
 
         System.out.println("等待 5 秒以完成加載程序...");
+        System.out.println("配置的自動檢查間隔: " + BotConfig.getCheckIntervalMinutesv() + " 分鐘");
         Thread.sleep(5000);
-
         String activityType = BotConfig.getActivityType();
         switch (activityType) {
             case "WATCHING" -> jda.getPresence().setPresence(Activity.watching(BotConfig.getActivityText()), true);
