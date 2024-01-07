@@ -1,6 +1,6 @@
 # Youtube 通知機器人
 
-Discord 機器人，可通知成員有新的 YouTube 視頻發佈。<br>
+Discord 機器人，可通知成員有新的 YouTube 影片發佈。<br>
 使用 [JDA library](https://github.com/discord-jda/JDA) 以 Java 編寫。
 
 # 改寫說明
