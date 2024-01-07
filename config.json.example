@@ -1,0 +1,22 @@
+{
+  "owner": "DISCORD_OWNER_USER_ID",
+  "notifications_channel_id": "CHANNEL_FOR_NOTIFICATIONS_ID",
+  "messages": {
+    "new_video": "$CHANNEL (用戶頻道) 發佈了新影片 - $VIDEO_LINK (影片連結)",
+    "livestream": "$CHANNEL (用戶頻道) 開始了新直播 - $VIDEO_LINK (直播連結)"
+  },
+  "youtube_api_key": "YOUR_YOUTUBE_API_KEY",
+  "youtube_channels": [
+    {
+      "name": "CHANNEL1_NAME",
+      "id": "CHANNEL1_ID (https://www.youtube.com/channel/這裡就是ID)"
+    },
+    {
+      "name": "CHANNEL2_NAME",
+      "id": "CHANNEL2_ID (https://www.youtube.com/channel/這裡就是ID)"
+    }
+  ],
+  "status_type": "PLAYING / WATCHING / LISTENING",
+  "status_message": "YOUR_STATUS_MESSAGE",
+  "token": "YOUR_DISCORD_TOKEN"
+}
