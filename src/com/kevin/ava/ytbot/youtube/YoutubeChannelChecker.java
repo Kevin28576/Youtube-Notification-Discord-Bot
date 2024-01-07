@@ -90,19 +90,20 @@ public class YoutubeChannelChecker {
 
 
     /**
-     * 每15分鐘循環調用 {@link #hasNewVideos()}。
+     * 每 X 分鐘循環調用 {@link #hasNewVideos()}。
      */
     public static int cont = 0;
+    public static int checkIntervalMinutes = BotConfig.getCheckIntervalMinutesv();
     public void checkForNewVideosInLoop() {
         while (true) {
             try {
                 cont++;
-//                System.out.println("檢查第 " + cont + " 次");
+//                System.out.println("檢查第 " + cont + " 次 | " + checkIntervalMinutes + " 分鐘檢查一次。");
                 boolean tempNewVideos = hasNewVideos();
                 if (tempNewVideos) {
                     Bot.broadcastNewVideoMessage(isLiveStream(), this);
                 }
-                TimeUnit.MINUTES.sleep(10);
+                TimeUnit.MINUTES.sleep(checkIntervalMinutes); //
 //                Thread.sleep(1000);
             } catch (InterruptedException | URISyntaxException | IOException e) {
                 System.out.println("出現錯誤:");

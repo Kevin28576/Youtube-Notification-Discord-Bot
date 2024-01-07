@@ -22,6 +22,7 @@ public class BotConfig {
     private static String token;
     private static String activityText;
     private static String activityType;
+    private static int checkIntervalMinutes;
 
     /**
      * 讀取指定文件的內容。
@@ -64,6 +65,7 @@ public class BotConfig {
         notificationsChannelID = config.getString("notifications_channel_id");
         activityText = config.getString("status_message");
         activityType = config.getString("status_type");
+        checkIntervalMinutes = config.getInt("check_interval_minutes");
 
         JSONArray channels = new JSONArray(config.getJSONArray("youtube_channels"));
         for (int i = 0; i < channels.length(); i++) {
@@ -124,5 +126,8 @@ public class BotConfig {
 
     public static String getActivityType() {
         return activityType;
+    }
+    public static int getCheckIntervalMinutesv() {
+        return checkIntervalMinutes;
     }
 }

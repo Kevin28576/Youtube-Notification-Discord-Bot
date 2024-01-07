@@ -31,6 +31,7 @@ public class Bot extends ListenerAdapter {
     private static final ArrayList<YoutubeChannelChecker> youtubeChannelsCheckers = new ArrayList<>();
     private static JDA jda;
 
+
     /**
      * 確定 Discord 用戶是否為機器人的擁有者。
      * @param userId Discord 用戶的 ID
@@ -118,10 +119,11 @@ public class Bot extends ListenerAdapter {
                         broadcastNewVideoMessage(checker.isLiveStream(), checker);
                     }
                 }
+                int checkIntervalMinutes = BotConfig.getCheckIntervalMinutesv();
                 if(!wereAnyVideosFound)
-                    event.reply(MarkdownUtil.quoteBlock("未找到新影片。\n註：連續使用此指令將耗盡 Kevin 的 YouTube Data API v3 使用額度，預設的自動檢查為每 10 分鐘進行一次。")).setEphemeral(true).queue();
+                    event.reply(MarkdownUtil.quoteBlock("未找到新影片。\n註：連續使用此指令將耗盡 Kevin 的 YouTube Data API v3 使用額度，配置預設的自動檢查為每 " + checkIntervalMinutes + " 分鐘進行一次。")).setEphemeral(true).queue();
                 else
-                    event.reply(MarkdownUtil.quoteBlock("找到新影片!\n註：連續使用此指令將耗盡 Kevin 的 YouTube Data API v3 使用額度，預設的自動檢查為每 10 分鐘進行一次。")).setEphemeral(true).queue();
+                    event.reply(MarkdownUtil.quoteBlock("找到新影片!\n註：連續使用此指令將耗盡 Kevin 的 YouTube Data API v3 使用額度，配置預設的自動檢查為每 " + checkIntervalMinutes + " 分鐘進行一次。")).setEphemeral(true).queue();
 
             }
             case "help" -> event.reply(MarkdownUtil.bold(event.getJDA().getSelfUser().getName()) + " 指令列表：\n\n" +

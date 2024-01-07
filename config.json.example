@@ -16,6 +16,7 @@
       "id": "CHANNEL2_ID (https://www.youtube.com/channel/這裡就是ID)"
     }
   ],
+  "check_interval_minutes": 10,
   "status_type": "PLAYING / WATCHING / LISTENING",
   "status_message": "YOUR_STATUS_MESSAGE",
   "token": "YOUR_DISCORD_TOKEN"

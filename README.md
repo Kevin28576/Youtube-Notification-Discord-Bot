@@ -12,7 +12,7 @@ Discord 機器人，可通知成員有新的 YouTube 影片發佈。<br>
 - 支援多個 YouTube 頻道。
 - 自定義通知訊息。
 - 自定義 Discord 狀態。
-- 自定義檢查間隔。(請直接修改代碼)
+- 自定義檢查間隔。
 
 ## 待辦事項:
 
@@ -58,6 +58,7 @@ Discord 機器人，可通知成員有新的 YouTube 影片發佈。<br>
             "id": "CHANNEL2_ID (https://www.youtube.com/channel/THE_ID_PART)"
         }
     ],
+    "check_interval_minutes": 10,
     "status_type": "PLAYING / WATCHING / LISTENING",
     "status_message": "YOUR_STATUS_MESSAGE",
     "token": "YOUR_DISCORD_TOKEN"
