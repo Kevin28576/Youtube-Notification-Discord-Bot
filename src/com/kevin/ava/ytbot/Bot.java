@@ -142,14 +142,21 @@ public class Bot extends ListenerAdapter {
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS)
                 .addEventListeners(new Bot())
                 .build();
-        jda.getPresence().setPresence(Activity.playing("加載中..."), true);
-        jda.updateCommands().addCommands(
-                Commands.slash("輸出調試資料", "輸出機器人 debug 資料。"),
-                Commands.slash("設置通知頻道", "設置所有 YT 頻道的默認通知頻道。")
-                        .addOption(OptionType.CHANNEL, "channel", "你希望將通知放置在的頻道。", true),
-                Commands.slash("立即檢查新片", "強制檢查所有頻道的新影片資料。"),
-                Commands.slash("help", "列出所有指令及其使用說明。")
-        ).queue();
+        if(BotConfig.getEnableCommands()) {
+            System.out.println("加載斜線指令中...");
+            jda.getPresence().setPresence(Activity.playing("加載指令中..."), true);
+            jda.updateCommands().addCommands(
+                    Commands.slash("輸出調試資料", "輸出機器人 debug 資料。"),
+                    Commands.slash("設置通知頻道", "設置所有 YT 頻道的默認通知頻道。")
+                            .addOption(OptionType.CHANNEL, "channel", "你希望將通知放置在的頻道。", true),
+                    Commands.slash("立即檢查新片", "強制檢查所有頻道的新影片資料。"),
+                    Commands.slash("help", "列出所有指令及其使用說明。")
+            ).queue();
+            System.out.println("加載斜線指令完成!");
+        } else {
+            System.out.println("以不加載斜線指令的方式啟動中...");
+            jda.updateCommands().queue();
+        }
 
         System.out.println("等待 5 秒以完成加載程序...");
         System.out.println("配置的自動檢查間隔: " + BotConfig.getCheckIntervalMinutesv() + " 分鐘");
