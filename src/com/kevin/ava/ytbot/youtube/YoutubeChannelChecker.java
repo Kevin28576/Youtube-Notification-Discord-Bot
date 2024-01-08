@@ -118,8 +118,8 @@ public class YoutubeChannelChecker {
     }
 
     /**
-     * 如果有新視頻上傳，獲取其 YouTube ID。
-     * @return 最新視頻的 YouTube ID
+     * 如果有新影片上傳，獲取其 YouTube ID。
+     * @return 最新影片的 YouTube ID
      */
     public String getLatestUploadedVideoId() {
         return lastVideoFromPreviousCheck.getJSONObject("id").getString("videoId");
