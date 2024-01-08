@@ -17,6 +17,7 @@
     }
   ],
   "check_interval_minutes": 10,
+  "enable_commands": true,
   "status_type": "PLAYING / WATCHING / LISTENING",
   "status_message": "YOUR_STATUS_MESSAGE",
   "token": "YOUR_DISCORD_TOKEN"
