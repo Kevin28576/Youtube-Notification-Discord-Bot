@@ -2,6 +2,7 @@ package com.kevin.ava.ytbot;
 
 
 import com.kevin.ava.ytbot.config.BotConfig;
+import com.kevin.ava.ytbot.config.ConsoleColors;
 import com.kevin.ava.ytbot.youtube.YoutubeChannel;
 import com.kevin.ava.ytbot.youtube.YoutubeChannelChecker;
 import net.dv8tion.jda.api.JDA;
@@ -31,24 +32,6 @@ public class Bot extends ListenerAdapter {
     private static final ArrayList<Thread> ytChannelsThreads = new ArrayList<>();
     private static final ArrayList<YoutubeChannelChecker> youtubeChannelsCheckers = new ArrayList<>();
     private static JDA jda;
-
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
-    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
-    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
     /**
      * 確定 Discord 用戶是否為機器人的擁有者。
@@ -160,30 +143,30 @@ public class Bot extends ListenerAdapter {
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS)
                 .addEventListeners(new Bot())
                 .build();
-        System.out.println(ANSI_BLUE_BACKGROUND + "========== [配置檢查] ==========" + ANSI_RESET);
-        System.out.println(ANSI_CYAN + "[配置] 自動檢查間隔: " + ANSI_RESET + BotConfig.getCheckIntervalMinutesv() + " 分鐘");
-        System.out.println(ANSI_CYAN + "[配置] 是否啟用指令: " + ANSI_RESET + BotConfig.getEnableCommands());String apiKey = BotConfig.getApiKey();
+        System.out.println(ConsoleColors.BLUE_BACKGROUND + "========== [配置檢查] ==========" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.CYAN + "[配置] 自動檢查間隔: " + ConsoleColors.RESET + BotConfig.getCheckIntervalMinutesv() + " 分鐘");
+        System.out.println(ConsoleColors.CYAN + "[配置] 是否啟用指令: " + ConsoleColors.RESET + BotConfig.getEnableCommands());String apiKey = BotConfig.getApiKey();
         if (apiKey.length() > 7) {
             String visiblePart = apiKey.substring(0, 4);
             String hiddenPart = apiKey.substring(4, apiKey.length() - 3).replaceAll(".", "*");
             String lastPart = apiKey.substring(apiKey.length() - 3);
             String maskedApiKey = visiblePart + hiddenPart + lastPart;
-            System.out.println(ANSI_CYAN + "[配置] Youtube API Key: " + ANSI_RESET + maskedApiKey);
+            System.out.println(ConsoleColors.CYAN + "[配置] Youtube API Key: " + ConsoleColors.RESET + maskedApiKey);
         } else {
-            System.out.println(ANSI_CYAN + "[配置] Youtube API Key: " + ANSI_RESET + apiKey);
+            System.out.println(ConsoleColors.CYAN + "[配置] Youtube API Key: " + ConsoleColors.RESET + apiKey);
         }
-        System.out.println(ANSI_CYAN + "[配置] Discord 通知頻道: " + ANSI_RESET + BotConfig.getNotificationsChannelID());
+        System.out.println(ConsoleColors.CYAN + "[配置] Discord 通知頻道: " + ConsoleColors.RESET + BotConfig.getNotificationsChannelID());
         List<YoutubeChannel> channels = BotConfig.getChannels();
-        System.out.println(ANSI_CYAN + "[配置] 追蹤的 YouTube 頻道:" + ANSI_RESET);
+        System.out.println(ConsoleColors.CYAN + "[配置] 追蹤的 YouTube 頻道:" + ConsoleColors.RESET);
 
         for (YoutubeChannel channel : channels) {
             System.out.println("  - " + channel.name() + " (" + channel.id() + ")");
         }
-        System.out.println(ANSI_CYAN + "共 " + ANSI_RESET + channels.size() + ANSI_CYAN + " 個" + ANSI_RESET);
+        System.out.println(ConsoleColors.CYAN + "共 " + ConsoleColors.RESET + channels.size() + ConsoleColors.CYAN + " 個" + ConsoleColors.RESET);
 
-        System.out.println(ANSI_BLUE_BACKGROUND + "========== [指令加載] ==========" + ANSI_RESET);
+        System.out.println(ConsoleColors.BLUE_BACKGROUND + "========== [指令加載] ==========" + ConsoleColors.RESET);
         if(BotConfig.getEnableCommands()) {
-            System.out.println(ANSI_YELLOW + "[指令] 加載斜線指令中..." + ANSI_RESET);
+            System.out.println(ConsoleColors.YELLOW + "[指令] 加載斜線指令中..." + ConsoleColors.RESET);
             jda.getPresence().setPresence(Activity.playing("[指令] 加載指令中..."), true);
             jda.updateCommands().addCommands(
                     Commands.slash("輸出調試資料", "輸出機器人 debug 資料。"),
@@ -192,13 +175,13 @@ public class Bot extends ListenerAdapter {
                     Commands.slash("立即檢查新片", "強制檢查所有頻道的新影片資料。"),
                     Commands.slash("help", "列出所有指令及其使用說明。")
             ).queue();
-            System.out.println(ANSI_GREEN + "[指令] 加載斜線指令完成!" + ANSI_RESET);
+            System.out.println(ConsoleColors.GREEN + "[指令] 加載斜線指令完成!" + ConsoleColors.RESET);
         } else {
-            System.out.println(ANSI_YELLOW + "[指令] 以不加載斜線指令的方式啟動中..." + ANSI_RESET);
+            System.out.println(ConsoleColors.YELLOW + "[指令] 以不加載斜線指令的方式啟動中..." + ConsoleColors.RESET);
             jda.updateCommands().queue();
         }
 
-        System.out.println(ANSI_YELLOW + "[系統] 等待 5 秒以完成加載程序..." + ANSI_RESET);
+        System.out.println(ConsoleColors.YELLOW + "[系統] 等待 5 秒以完成加載程序..." + ConsoleColors.RESET);
         Thread.sleep(5000);
         String activityType = BotConfig.getActivityType();
         switch (activityType) {
@@ -215,10 +198,10 @@ public class Bot extends ListenerAdapter {
         for(Thread thread : ytChannelsThreads)
             thread.start();
         channels = BotConfig.getChannels();
-        System.out.println(ANSI_GREEN + "[系統] 開始偵測 " + channels.size() + " 個 Youtube 頻道!" + ANSI_RESET);
+        System.out.println(ConsoleColors.GREEN + "[系統] 開始偵測 " + channels.size() + " 個 Youtube 頻道!" + ConsoleColors.RESET);
         if(channels.size() >= 2) {
-            System.out.println(ANSI_RED_BACKGROUND + "[警告] 偵測的頻道數為 "+ channels.size() + " 個，這會導致你的 API key 再偵測時會被調用 " + channels.size() + " 次。" + ANSI_RESET);
-            System.out.println(ANSI_RED_BACKGROUND + "[警告] 如　API Key 在短時間被調用太多次會導致費用增加，因此建議把自動偵測時間給調到至少10分鐘。" + ANSI_RESET);
+            System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 偵測的頻道數為 "+ channels.size() + " 個，這會導致你的 API key 再偵測時會被調用 " + channels.size() + " 次。" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 如　API Key 在短時間被調用太多次會導致費用增加，因此建議把自動偵測時間給調到至少10分鐘。" + ConsoleColors.RESET);
         }
     }
 }
