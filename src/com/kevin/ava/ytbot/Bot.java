@@ -2,7 +2,7 @@ package com.kevin.ava.ytbot;
 
 
 import com.kevin.ava.ytbot.config.BotConfig;
-import com.kevin.ava.ytbot.config.ConsoleColors;
+import com.kevin.ava.ytbot.utils.ConsoleColors;
 import com.kevin.ava.ytbot.youtube.YoutubeChannel;
 import com.kevin.ava.ytbot.youtube.YoutubeChannelChecker;
 import net.dv8tion.jda.api.JDA;

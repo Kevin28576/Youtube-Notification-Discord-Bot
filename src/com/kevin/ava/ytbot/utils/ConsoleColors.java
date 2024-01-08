@@ -1,4 +1,4 @@
-package com.kevin.ava.ytbot.config;
+package com.kevin.ava.ytbot.utils;
 
 public class ConsoleColors {
     // Reset
