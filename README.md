@@ -72,4 +72,4 @@ Discord 機器人，可通知成員有新的 YouTube 影片發佈。<br>
 java -jar <file_name>.jar &
 ```
 
-<sup>& 使 JVM 與終端窗口分離，允許您關閉它。</sup>
+<sup>在後面加上 & 可以使 JVM 與終端窗口分離，這樣你就可以直接關閉它並運行。</sup>
