@@ -44,10 +44,45 @@ public class BotConfig {
      * @throws IOException
      */
     public static void createConfig() throws IOException {
-        if(!CONFIG_FILE.exists()) {
-            if(!CONFIG_FILE.createNewFile()) {
+        if (!CONFIG_FILE.exists()) {
+            if (!CONFIG_FILE.createNewFile()) {
                 System.out.println("無法創建 config.json 文件。");
                 System.exit(1);
+            } else {
+                // 如果文件不存在，填入預設內容
+                JSONObject defaultConfig = new JSONObject();
+                defaultConfig.put("owner", "DISCORD_OWNER_USER_ID");
+                defaultConfig.put("notifications_channel_id", "CHANNEL_FOR_NOTIFICATIONS_ID");
+
+                JSONObject messages = new JSONObject();
+                messages.put("new_video", "$CHANNEL published a new video - $VIDEO_LINK");
+                messages.put("livestream", "$CHANNEL started a new livestream - $VIDEO_LINK");
+
+                defaultConfig.put("messages", messages);
+                defaultConfig.put("youtube_api_key", "YOUR_YOUTUBE_API_KEY");
+
+                JSONArray youtubeChannels = new JSONArray();
+                JSONObject channel1 = new JSONObject();
+                channel1.put("name", "CHANNEL1_NAME");
+                channel1.put("id", "CHANNEL1_ID (https://www.youtube.com/channel/Here_is_the_ID)");
+                youtubeChannels.put(channel1);
+
+                JSONObject channel2 = new JSONObject();
+                channel2.put("name", "CHANNEL2_NAME");
+                channel2.put("id", "CHANNEL2_ID (https://www.youtube.com/channel/Here_is_the_ID)");
+                youtubeChannels.put(channel2);
+
+                defaultConfig.put("youtube_channels", youtubeChannels);
+
+                defaultConfig.put("check_interval_minutes", 10);
+                defaultConfig.put("enable_commands", true);
+                defaultConfig.put("status_type", "PLAYING / WATCHING / LISTENING");
+                defaultConfig.put("status_message", "YOUR_STATUS_MESSAGE");
+                defaultConfig.put("token", "YOUR_DISCORD_TOKEN");
+
+                try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
+                    writer.write(defaultConfig.toString(4));
+                }
             }
         }
         File lastYoutubeVideoDirectory = new File("last_youtube_videos");
