@@ -197,11 +197,10 @@ public class Bot extends ListenerAdapter {
         }
         for(Thread thread : ytChannelsThreads)
             thread.start();
-        channels = BotConfig.getChannels();
-        System.out.println(ConsoleColors.GREEN + "[系統] 開始偵測 " + channels.size() + " 個 Youtube 頻道!" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.GREEN + "[系統] 開始追蹤 " + channels.size() + " 個 Youtube 頻道!" + ConsoleColors.RESET);
         if(channels.size() >= 2) {
-            System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 偵測的頻道數為 "+ channels.size() + " 個，這會導致你的 API key 再偵測時會被調用 " + channels.size() + " 次。" + ConsoleColors.RESET);
-            System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 如　API Key 在短時間被調用太多次會導致費用增加，因此建議把自動偵測時間給調到至少10分鐘。" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 追蹤的頻道數為 "+ channels.size() + " 個，這會導致你的 API key 在偵測時會被調用 " + channels.size() + " 次。" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 如 API Key 在短時間被調用太多次會導致費用增加，因此建議把自動偵測時間調到至少10分鐘。" + ConsoleColors.RESET);
         }
     }
 }
