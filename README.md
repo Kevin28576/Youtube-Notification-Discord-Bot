@@ -35,7 +35,7 @@ Discord 機器人，可通知成員有新的 YouTube 影片發佈。<br>
 
 1. 安裝 Java 17 或更新版本。
 2. 從 [最新版本](https://github.com/Kevin28576/Youtube-Notification-Discord-Bot/releases/latest) 下載 jar 文件。
-3. 創建一個名為 **config.json** 的配置文件。
+3. 創建一個名為 **config.json** 的配置文件。(也可選擇初次啟動時自動創建預設文件)
 4. 填寫配置文件內容如下：
 
 
