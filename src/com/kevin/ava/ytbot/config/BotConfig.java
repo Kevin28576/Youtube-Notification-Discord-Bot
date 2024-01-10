@@ -1,6 +1,7 @@
 package com.kevin.ava.ytbot.config;
 
 import com.kevin.ava.ytbot.youtube.YoutubeChannel;
+import com.kevin.ava.ytbot.utils.ConsoleColors;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +51,8 @@ public class BotConfig {
                 System.exit(1);
             } else {
                 // 如果文件不存在，填入預設內容
+                System.out.println(ConsoleColors.RED_BACKGROUND + "========== [配置文件缺失] ==========" + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.YELLOW + "[錯誤] 未發現配置文件，自動創建中。" + ConsoleColors.RESET);
                 JSONObject defaultConfig = new JSONObject();
                 defaultConfig.put("owner", "DISCORD_OWNER_USER_ID");
                 defaultConfig.put("notifications_channel_id", "CHANNEL_FOR_NOTIFICATIONS_ID");
@@ -82,6 +85,7 @@ public class BotConfig {
 
                 try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
                     writer.write(defaultConfig.toString(4));
+                    System.out.println(ConsoleColors.YELLOW + "[錯誤] 已自動創建配置文件，請前往填寫。" + ConsoleColors.RESET);
                 }
             }
         }
