@@ -122,9 +122,9 @@ public class Bot extends ListenerAdapter {
                 }
                 int checkIntervalMinutes = BotConfig.getCheckIntervalMinutesv();
                 if(!wereAnyVideosFound)
-                    event.reply(MarkdownUtil.quoteBlock("未找到新影片。\n註：連續使用此指令將耗盡 Kevin 的 YouTube Data API v3 使用額度，配置預設的自動檢查為每 " + checkIntervalMinutes + " 分鐘進行一次。")).setEphemeral(true).queue();
+                    event.reply(MarkdownUtil.quoteBlock("未找到新影片。\n註：連續使用此指令將耗盡你的 YouTube Data API v3 使用額度，配置預設的自動檢查為每 " + checkIntervalMinutes + " 分鐘進行一次。")).setEphemeral(true).queue();
                 else
-                    event.reply(MarkdownUtil.quoteBlock("找到新影片!\n註：連續使用此指令將耗盡 Kevin 的 YouTube Data API v3 使用額度，配置預設的自動檢查為每 " + checkIntervalMinutes + " 分鐘進行一次。")).setEphemeral(true).queue();
+                    event.reply(MarkdownUtil.quoteBlock("找到新影片!\n註：連續使用此指令將耗盡你的 YouTube Data API v3 使用額度，配置預設的自動檢查為每 " + checkIntervalMinutes + " 分鐘進行一次。")).setEphemeral(true).queue();
 
             }
             case "help" -> event.reply(MarkdownUtil.bold(event.getJDA().getSelfUser().getName()) + " 指令列表：\n\n" +
