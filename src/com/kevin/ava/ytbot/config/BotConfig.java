@@ -47,7 +47,7 @@ public class BotConfig {
     public static void createConfig() throws IOException {
         if (!CONFIG_FILE.exists()) {
             if (!CONFIG_FILE.createNewFile()) {
-                System.out.println("無法創建 config.json 文件。");
+                System.out.println(ConsoleColors.RED + "[錯誤] 無法創建 config.json 文件，請檢查系統是否有權限執行此檔案。" + ConsoleColors.RESET);
                 System.exit(1);
             } else {
                 // 如果文件不存在，填入預設內容
@@ -92,7 +92,7 @@ public class BotConfig {
         File lastYoutubeVideoDirectory = new File("last_youtube_videos");
         if(!lastYoutubeVideoDirectory.exists()) {
             if(!lastYoutubeVideoDirectory.mkdir()) {
-                System.out.println("無法創建 \"last_youtube_videos\" 目錄。");
+                System.out.println(ConsoleColors.RED + "[錯誤] 無法創建 \"last_youtube_videos\" 目錄。" + ConsoleColors.RESET);
                 System.exit(1);
             }
         }
