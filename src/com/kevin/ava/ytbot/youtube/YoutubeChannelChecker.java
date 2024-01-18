@@ -103,7 +103,7 @@ public class YoutubeChannelChecker {
                 if (tempNewVideos) {
                     Bot.broadcastNewVideoMessage(isLiveStream(), this);
                 }
-                TimeUnit.MINUTES.sleep(checkIntervalMinutes); // 抓取配置的 check_interval_minutes 配置
+                TimeUnit.MINUTES.sleep(checkIntervalMinutes); // 抓取配置的 check_interval_minutes 時間
 //                Thread.sleep(1000);
             } catch (InterruptedException | URISyntaxException | IOException e) {
                 System.out.println("出現錯誤:");
