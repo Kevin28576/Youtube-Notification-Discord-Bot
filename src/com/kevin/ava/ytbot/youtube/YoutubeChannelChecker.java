@@ -61,7 +61,8 @@ public class YoutubeChannelChecker {
         }
         JSONObject lastVideoFromCurrentCheck = videos.getJSONObject(0);
 
-        File lastYoutubeVideoFile = new File("last_youtube_videos/last_youtube_video_" + getYoutubeChannel().name() + ".json");
+        File lastYoutubeVideoFile = new File("last_youtube_videos/" + getYoutubeChannel().name() + ".json");
+//        File lastYoutubeVideoFile = new File("last_youtube_videos/last_youtube_video_" + getYoutubeChannel().name() + ".json");
         if (!lastYoutubeVideoFile.exists())
             lastYoutubeVideoFile.createNewFile();
 

@@ -5,6 +5,7 @@ import com.kevin.ava.ytbot.config.BotConfig;
 import com.kevin.ava.ytbot.utils.ConsoleColors;
 import com.kevin.ava.ytbot.youtube.YoutubeChannel;
 import com.kevin.ava.ytbot.youtube.YoutubeChannelChecker;
+import com.sun.net.httpserver.HttpServer;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -17,10 +18,12 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
+import service.MyHandler;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.net.InetSocketAddress;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -145,7 +148,10 @@ public class Bot extends ListenerAdapter {
                 .build();
         System.out.println(ConsoleColors.BLUE_BACKGROUND + "========== [配置檢查] ==========" + ConsoleColors.RESET);
         System.out.println(ConsoleColors.CYAN + "[配置] 自動檢查間隔: " + ConsoleColors.RESET + BotConfig.getCheckIntervalMinutesv() + " 分鐘");
-        System.out.println(ConsoleColors.CYAN + "[配置] 是否啟用指令: " + ConsoleColors.RESET + BotConfig.getEnableCommands());String apiKey = BotConfig.getApiKey();
+        System.out.println(ConsoleColors.CYAN + "[配置] 是否啟用指令: " + ConsoleColors.RESET + BotConfig.getEnableCommands());
+        System.out.println(ConsoleColors.CYAN + "[配置] 是否啟用 API 服務: " + ConsoleColors.RESET + BotConfig.getEnableAPI());
+
+        String apiKey = BotConfig.getApiKey();
         if (apiKey.length() > 7) {
             String visiblePart = apiKey.substring(0, 4);
             String hiddenPart = apiKey.substring(4, apiKey.length() - 3).replaceAll(".", "*");
@@ -181,6 +187,15 @@ public class Bot extends ListenerAdapter {
             jda.updateCommands().queue();
         }
 
+        System.out.println(ConsoleColors.BLUE_BACKGROUND + "========== [API 加載] ==========" + ConsoleColors.RESET);
+        if(BotConfig.getEnableAPI()) {
+            System.out.println(ConsoleColors.YELLOW + "[API] 加載服務中..." + ConsoleColors.RESET);
+            startApiServer();
+            System.out.println(ConsoleColors.GREEN + "[API] 加載服務完成!" + ConsoleColors.RESET);
+        } else {
+            System.out.println(ConsoleColors.YELLOW + "[API] 以不加載服務的方式啟動中..." + ConsoleColors.RESET);
+        }
+
         System.out.println(ConsoleColors.YELLOW + "[系統] 等待 5 秒以完成加載程序..." + ConsoleColors.RESET);
         Thread.sleep(5000);
         String activityType = BotConfig.getActivityType();
@@ -202,5 +217,15 @@ public class Bot extends ListenerAdapter {
             System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 追蹤的頻道數為 "+ channels.size() + " 個，這會導致你的 API key 在偵測時會被調用 " + channels.size() + " 次。" + ConsoleColors.RESET);
             System.out.println(ConsoleColors.RED_BACKGROUND + "[警告] 如 API Key 在短時間被調用太多次會導致費用增加，因此建議把自動偵測時間調到至少10分鐘。" + ConsoleColors.RESET);
         }
+    }
+    private static void startApiServer() throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(BotConfig.getAPIPort()), 0);
+
+        server.createContext("/api/channel/data", new MyHandler());
+
+        server.setExecutor(null);
+        server.start();
+
+        System.out.println("Server is running on port " + BotConfig.getAPIPort());
     }
 }

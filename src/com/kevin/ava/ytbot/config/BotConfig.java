@@ -1,7 +1,7 @@
 package com.kevin.ava.ytbot.config;
 
-import com.kevin.ava.ytbot.youtube.YoutubeChannel;
 import com.kevin.ava.ytbot.utils.ConsoleColors;
+import com.kevin.ava.ytbot.youtube.YoutubeChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +25,8 @@ public class BotConfig {
     private static String activityType;
     private static int checkIntervalMinutes;
     private static boolean enableCommands;
+    private static boolean enableAPI;
+    private static int API_Port;
 
     /**
      * 讀取指定文件的內容。
@@ -78,7 +80,14 @@ public class BotConfig {
                 defaultConfig.put("youtube_channels", youtubeChannels);
 
                 defaultConfig.put("check_interval_minutes", 10);
-                defaultConfig.put("enable_commands", true);
+
+                JSONObject service = new JSONObject();
+                service.put("API", true);
+                service.put("API_Port", 3000);
+                service.put("Slashcommand", true);
+
+                defaultConfig.put("service", service);
+
                 defaultConfig.put("status_type", "PLAYING / WATCHING / LISTENING");
                 defaultConfig.put("status_message", "YOUR_STATUS_MESSAGE");
                 defaultConfig.put("token", "YOUR_DISCORD_TOKEN");
@@ -106,7 +115,7 @@ public class BotConfig {
         activityText = config.getString("status_message");
         activityType = config.getString("status_type");
         checkIntervalMinutes = config.getInt("check_interval_minutes");
-        enableCommands = config.getBoolean("enable_commands");
+
 
         JSONArray channels = new JSONArray(config.getJSONArray("youtube_channels"));
         for (int i = 0; i < channels.length(); i++) {
@@ -116,6 +125,11 @@ public class BotConfig {
         JSONObject messages = config.getJSONObject("messages");
         newVideoMessage = messages.getString("new_video");
         livestreamMessage = messages.getString("livestream");
+
+        JSONObject service = config.getJSONObject("service");
+        enableAPI = service.getBoolean("API");
+        API_Port = service.getInt("API_Port");
+        enableCommands = service.getBoolean("Slashcommand");
     }
 
     /**
@@ -173,5 +187,11 @@ public class BotConfig {
     }
     public static boolean getEnableCommands() {
         return enableCommands;
+    }
+    public static boolean getEnableAPI() {
+        return enableAPI;
+    }
+    public static int getAPIPort() {
+        return API_Port;
     }
 }

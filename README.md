@@ -59,7 +59,11 @@ Discord 機器人，可通知成員有新的 YouTube 影片發佈。<br>
         }
     ],
     "check_interval_minutes": 10,
-    "enable_commands": true,
+    "service": {
+      "API": true,
+      "API_Port": 3000,
+      "Slashcommand": true
+    },
     "status_type": "PLAYING / WATCHING / LISTENING",
     "status_message": "YOUR_STATUS_MESSAGE",
     "token": "YOUR_DISCORD_TOKEN"
